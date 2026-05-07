@@ -51,8 +51,34 @@ function agregarContacto() {
   mostrarContactos();
 }
 
+// Muestra todos los contactos como tarjetas
 function mostrarContactos() {
-  // por implementar en siguiente rama
+  let contenedor   = document.getElementById("contenedorContactos");
+  let mensajeLista = document.getElementById("mensajeLista");
+  contenedor.innerHTML = "";
+
+  if (contactos.length === 0) {
+    mensajeLista.innerText = "No hay contactos registrados.";
+    return;
+  }
+
+  mensajeLista.innerText = "";
+
+  contactos.forEach(function(contacto, index) {
+    let tarjeta = document.createElement("div");
+    tarjeta.className = "tarjeta-contacto";
+
+    tarjeta.innerHTML = `
+      <p><strong>Nombre:</strong> ${contacto.nombre}</p>
+      <p><strong>Teléfono:</strong> ${contacto.telefono}</p>
+      <p><strong>Correo:</strong> ${contacto.correo}</p>
+      <button class="btn-eliminar" onclick="eliminarContacto(${index})">
+        Eliminar
+      </button>
+    `;
+
+    contenedor.appendChild(tarjeta);
+  });
 }
 
 function eliminarContacto(index) {
