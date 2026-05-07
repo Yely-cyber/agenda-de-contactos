@@ -92,3 +92,33 @@ function eliminarContacto(index) {
 
   mostrarContactos();
 }
+
+function buscarContacto() {
+  let termino = document.getElementById("buscador").value.trim().toLowerCase();
+  let contenedor = document.getElementById("contenedorContactos");
+  contenedor.innerHTML = "";
+
+  let resultados = contactos.filter(function(contacto) {
+    return contacto.nombre.toLowerCase().includes(termino);
+  });
+
+  if (resultados.length === 0) {
+    document.getElementById("mensajeLista").innerText = "No se encontraron contactos.";
+    document.getElementById("mensajeLista").className = "error";
+    return;
+  }
+
+  document.getElementById("mensajeLista").innerText = "";
+
+  resultados.forEach(function(contacto, index) {
+    let tarjeta = document.createElement("div");
+    tarjeta.className = "tarjeta-contacto";
+    tarjeta.innerHTML = `
+      <p><strong>Nombre:</strong> ${contacto.nombre}</p>
+      <p><strong>Teléfono:</strong> ${contacto.telefono}</p>
+      <p><strong>Correo:</strong> ${contacto.correo}</p>
+      <button class="btn-eliminar" onclick="eliminarContacto(${contactos.indexOf(contacto)})">Eliminar</button>
+    `;
+    contenedor.appendChild(tarjeta);
+  });
+}
