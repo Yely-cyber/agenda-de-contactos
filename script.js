@@ -81,6 +81,14 @@ function mostrarContactos() {
   });
 }
 
+// Elimina un contacto por su índice
 function eliminarContacto(index) {
-  // por implementar en siguiente rama
+  let nombreEliminado = contactos[index].nombre;
+  contactos.splice(index, 1);
+
+  let mensajeLista = document.getElementById("mensajeLista");
+  mensajeLista.innerText = "Contacto '" + nombreEliminado + "' eliminado.";
+  mensajeLista.className = "error";
+
+  mostrarContactos();
 }
